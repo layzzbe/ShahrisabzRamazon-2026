@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
@@ -10,9 +10,18 @@ const playfair = Playfair_Display({
     variable: "--font-playfair",
 });
 
+export const viewport: Viewport = {
+    themeColor: "#064e3b",
+};
+
 export const metadata: Metadata = {
     title: "Shahrisabz Ramazon Taqvimi 2026",
     description: "Shahrisabz shahri uchun aniq Ramazon taqvimi, saharlik va iftorlik vaqtlari, duolar va masjidlar ro'yxati.",
+    appleWebApp: {
+        title: "Ramazon",
+        statusBarStyle: "default",
+        capable: true,
+    },
     openGraph: {
         title: "Shahrisabz Ramazon Taqvimi 2026",
         description: "Shahrisabz shahri uchun aniq Ramazon taqvimi, saharlik va iftorlik vaqtlari.",
