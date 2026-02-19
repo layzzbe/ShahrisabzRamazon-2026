@@ -213,7 +213,7 @@ export default function Home() {
 
                     <div className="w-full">
                         <a
-                            href={`https://t.me/share/url?url=${encodeURIComponent("https://shahrisabz-ramazon.vercel.app")}&text=${encodeURIComponent(`🌙 Shahrisabz Ramazon Taqvimi 2026.\n\nBugun biz bilan birga ${shareCount ? shareCount.toLocaleString() : "1,250+"} kishi ro'za tutmoqda! Siz ham qo'shiling:`)}`}
+                            href={`https://t.me/share/url?url=${encodeURIComponent("https://shahrisabz-ramazon.vercel.app")}&text=${encodeURIComponent(`👆 Safimizga qo'shiling!\n\n🌙 Shahrisabz Ramazon Taqvimi 2026.\nBugun biz bilan birga ${shareCount ? shareCount.toLocaleString() : "1,250+"} kishi ro'za tutmoqda!`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center gap-2 w-full py-3 bg-[#229ED9] hover:bg-[#1e8dbf] text-white font-bold text-base rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95"
