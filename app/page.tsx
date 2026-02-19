@@ -198,7 +198,7 @@ export default function Home() {
 
                 {/* Big Countdown */}
                 <div className="text-center mt-auto pb-4">
-                    <div className="flex flex-col items-center justify-center mb-3">
+                    <div className="flex flex-col items-center justify-center mb-2">
                         <span className="text-xs sm:text-sm font-bold text-emerald-300 tracking-[0.2em] font-mono opacity-80 mb-0.5">
                             {countdownLabel}
                         </span>
@@ -207,13 +207,13 @@ export default function Home() {
                         </span>
                     </div>
 
-                    <div className="mb-4">
+                    <div className="mb-3">
                         <FastingCounter />
                     </div>
 
                     <div className="w-full">
                         <a
-                            href={`https://t.me/share/url?url=https://shahrisabz-ramazon.vercel.app&text=🌙 Shahrisabz Ramazon Taqvimi 2026.%0A%0ABugun biz bilan birga ${shareCount ? shareCount.toLocaleString() : "1,250+"} kishi ro'za tutmoqda! Siz ham qo'shiling:`}
+                            href={`https://t.me/share/url?url=&text=${encodeURIComponent(`🌙 Shahrisabz Ramazon Taqvimi 2026.\n\nBugun biz bilan birga ${shareCount ? shareCount.toLocaleString() : "1,250+"} kishi ro'za tutmoqda! Siz ham qo'shiling:\nhttps://shahrisabz-ramazon.vercel.app/`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center gap-2 w-full py-3 bg-[#229ED9] hover:bg-[#1e8dbf] text-white font-bold text-base rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95"
