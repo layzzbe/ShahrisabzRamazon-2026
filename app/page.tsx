@@ -168,8 +168,8 @@ export default function Home() {
 
                 {/* Visual Progress Bar */}
                 <div className="mb-6 relative w-full px-1">
-                    {/* Time & Date Display - Centered absolutely relative to the bar container */}
-                    <div className="absolute -top-8 left-0 right-0 flex justify-center z-20">
+                    {/* Time & Date Display */}
+                    <div className="flex justify-center mb-3 mt-1 relative z-20">
                         <span className="text-gold-400 font-mono font-bold text-xl drop-shadow-md">
                             {currentTimeStr}
                         </span>
