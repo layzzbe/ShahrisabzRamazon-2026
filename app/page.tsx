@@ -24,7 +24,9 @@ export default function Home() {
         fetch("/api/fasting", { cache: 'no-store' })
             .then(res => res.json())
             .then(data => {
-                if (data.count) setShareCount(data.count);
+                // Compatible with both old {count} and new {daily, total}
+                if (typeof data.daily === 'number') setShareCount(data.daily);
+                else if (typeof data.count === 'number') setShareCount(data.count);
             })
             .catch(err => console.error(err));
 
@@ -146,36 +148,36 @@ export default function Home() {
                 </header>
 
                 {/* Main Cards */}
-                <div className="grid grid-cols-2 gap-4 mb-10">
+                <div className="grid grid-cols-2 gap-4 mb-6">
                     {/* Saharlik Card */}
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-5 flex flex-col items-center justify-center aspect-square shadow-xl relative overflow-hidden group">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1.5rem] p-4 flex flex-col items-center justify-center aspect-square shadow-xl relative overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <span className="text-emerald-200 text-xs font-bold tracking-wider mb-2 uppercase">Saharlik</span>
+                        <span className="text-emerald-200 text-xs font-bold tracking-wider mb-1 uppercase">Saharlik</span>
                         <div className="text-4xl sm:text-5xl font-black text-white mb-2">{currentDay.sahar}</div>
                         <Sunrise className="text-gold-400 w-8 h-8 opacity-80" />
                     </div>
 
                     {/* Iftorlik Card */}
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-5 flex flex-col items-center justify-center aspect-square shadow-xl relative overflow-hidden group">
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1.5rem] p-4 flex flex-col items-center justify-center aspect-square shadow-xl relative overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <span className="text-emerald-200 text-xs font-bold tracking-wider mb-2 uppercase">Iftorlik</span>
+                        <span className="text-emerald-200 text-xs font-bold tracking-wider mb-1 uppercase">Iftorlik</span>
                         <div className="text-4xl sm:text-5xl font-black text-white mb-2">{currentDay.iftar}</div>
                         <Moon className="text-gold-400 w-8 h-8 opacity-80" />
                     </div>
                 </div>
 
                 {/* Visual Progress Bar */}
-                <div className="mb-12 relative w-full px-1">
+                <div className="mb-8 relative w-full px-1">
                     {/* Time & Date Display - Centered absolutely relative to the bar container */}
-                    <div className="absolute -top-10 left-0 right-0 flex justify-center z-20">
-                        <span className="text-gold-400 font-mono font-bold text-2xl drop-shadow-md">
+                    <div className="absolute -top-8 left-0 right-0 flex justify-center z-20">
+                        <span className="text-gold-400 font-mono font-bold text-xl drop-shadow-md">
                             {currentTimeStr}
                         </span>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                        <span className="text-emerald-400 font-bold text-xs tracking-wider">TONG</span>
-                        <div className="flex-1 h-4 bg-emerald-950/80 border border-emerald-800/50 rounded-full relative p-0.5 shadow-inner">
+                    <div className="flex items-center gap-2">
+                        <span className="text-emerald-400 font-bold text-[10px] tracking-wider">TONG</span>
+                        <div className="flex-1 h-3 bg-emerald-950/80 border border-emerald-800/50 rounded-full relative p-0.5 shadow-inner">
                             <div
                                 className="h-full bg-emerald-500 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.6)] transition-all duration-1000 ease-out"
                                 style={{ width: `${progress}%` }}
@@ -184,19 +186,19 @@ export default function Home() {
                                 <div className="absolute right-0 top-0 bottom-0 w-2 bg-white/50 blur-[2px] rounded-full" />
                             </div>
                         </div>
-                        <span className="text-emerald-400 font-bold text-xs tracking-wider">SHOM</span>
+                        <span className="text-emerald-400 font-bold text-[10px] tracking-wider">SHOM</span>
                     </div>
 
-                    <div className="absolute -bottom-8 left-0 right-0 flex justify-center">
-                        <span className="text-emerald-200/60 text-[10px] font-bold tracking-[0.2em] uppercase">
+                    <div className="absolute -bottom-6 left-0 right-0 flex justify-center">
+                        <span className="text-emerald-200/60 text-[9px] font-bold tracking-[0.2em] uppercase">
                             {currentDateStr}
                         </span>
                     </div>
                 </div>
 
                 {/* Big Countdown */}
-                <div className="text-center mt-auto pb-6">
-                    <div className="flex flex-col items-center justify-center mb-6">
+                <div className="text-center mt-auto pb-4">
+                    <div className="flex flex-col items-center justify-center mb-4">
                         <span className="text-sm font-bold text-emerald-300 tracking-[0.2em] font-mono opacity-80 mb-1">
                             {countdownLabel}
                         </span>
@@ -205,7 +207,7 @@ export default function Home() {
                         </span>
                     </div>
 
-                    <div className="mb-6">
+                    <div className="mb-4">
                         <FastingCounter />
                     </div>
 
@@ -214,7 +216,7 @@ export default function Home() {
                             href={`https://t.me/share/url?url=https://shahrisabz-ramazon-2026.vercel.app&text=🌙 Shahrisabz Ramazon Taqvimi 2026.%0A%0ABugun biz bilan birga ${shareCount ? shareCount.toLocaleString() : "1,250+"} kishi ro'za tutmoqda! Siz ham qo'shiling:`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2 w-full py-3 bg-[#229ED9] hover:bg-[#1e8dbf] text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95"
+                            className="flex items-center justify-center gap-2 w-full py-3 bg-[#229ED9] hover:bg-[#1e8dbf] text-white font-bold text-base rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95"
                         >
                             <Share2 size={20} />
                             Telegramda Ulashish
@@ -226,7 +228,7 @@ export default function Home() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1, duration: 1 }}
-                        className="mt-8 mb-4 text-center"
+                        className="mt-6 mb-2 text-center"
                     >
                         <a
                             href="https://www.instagram.com/layzz.be/"

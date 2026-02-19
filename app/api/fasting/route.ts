@@ -21,22 +21,34 @@ const getDateKey = () => {
 export async function GET() {
     try {
         const key = getDateKey();
-        const count = await kv.get<number>(key);
-        // Default to a realistic starting number for the first day if 0, or just 0.
-        // For visual appeal, maybe 0 is bad? But "daily reset" implies 0.
-        // User said "starts from 0 automatically".
-        return NextResponse.json({ count: count || 0 }, { headers: { 'Cache-Control': 'no-store' } });
+
+        // Fetch both keys in parallel
+        const [daily, total] = await Promise.all([
+            kv.get<number>(key),
+            kv.get<number>("fasting_count_total")
+        ]);
+
+        return NextResponse.json({
+            daily: daily || 0,
+            total: total || 1250 // Start total from a base if empty, or 0
+        }, { headers: { 'Cache-Control': 'no-store' } });
     } catch (error) {
         console.error("KV GET Error:", error);
-        return NextResponse.json({ count: 0 }, { status: 500 });
+        return NextResponse.json({ daily: 0, total: 1250 }, { status: 500 });
     }
 }
 
 export async function POST() {
     try {
         const key = getDateKey();
-        const count = await kv.incr(key);
-        return NextResponse.json({ count });
+
+        // Increment both keys in parallel
+        const [daily, total] = await Promise.all([
+            kv.incr(key),
+            kv.incr("fasting_count_total")
+        ]);
+
+        return NextResponse.json({ daily, total });
     } catch (error) {
         console.error("KV POST Error:", error);
         return NextResponse.json({ error: "Failed to update count" }, { status: 500 });

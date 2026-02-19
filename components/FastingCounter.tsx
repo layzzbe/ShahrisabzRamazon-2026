@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Heart, RefreshCw } from "lucide-react";
 
 export default function FastingCounter() {
-    const [count, setCount] = useState<number | null>(null);
+    const [counts, setCounts] = useState<{ daily: number; total: number } | null>(null);
     const [hasClicked, setHasClicked] = useState(false);
     const [showCelebration, setShowCelebration] = useState(false);
     const [isRefreshing, setIsRefreshing] = useState(false);
@@ -15,8 +15,9 @@ export default function FastingCounter() {
         try {
             const res = await fetch("/api/fasting", { cache: 'no-store' });
             const data = await res.json();
-            // Allow 0 as valid count
-            if (typeof data.count === 'number') setCount(data.count);
+            if (typeof data.daily === 'number' && typeof data.total === 'number') {
+                setCounts({ daily: data.daily, total: data.total });
+            }
         } catch (e) {
             console.error("Failed to fetch count", e);
         } finally {
@@ -39,8 +40,8 @@ export default function FastingCounter() {
     const handleClick = async () => {
         if (hasClicked) return;
 
-        const newCount = (count || 0) + 1;
-        setCount(newCount);
+        // Optimistic update
+        setCounts(prev => prev ? { daily: prev.daily + 1, total: prev.total + 1 } : { daily: 1, total: 1251 });
         setHasClicked(true);
         setShowCelebration(true);
 
@@ -56,7 +57,7 @@ export default function FastingCounter() {
         }
     };
 
-    if (count === null) return <div className="h-10"></div>; // Placeholder to avoid layout shift
+    if (counts === null) return <div className="h-16"></div>; // Compacted placeholder
 
     return (
         <div className="flex flex-col items-center gap-2 z-20 my-1 relative w-full">
@@ -91,16 +92,24 @@ export default function FastingCounter() {
                 <span>{hasClicked ? "Qabul bo'lsin!" : "Men ham ro'zadorman"}</span>
             </motion.button>
 
-            {/* Subtext with Count */}
-            <div className="flex items-center gap-2 text-[10px] text-emerald-200/60 font-medium tracking-wide bg-black/20 px-3 py-1 rounded-full backdrop-blur-sm">
-                <span>Bugun Shahrisabz bo'ylab <strong className="text-gold-400 text-xs mx-0.5">{count.toLocaleString()}</strong> kishi biz bilan</span>
-                <button
-                    onClick={fetchCount}
-                    disabled={isRefreshing}
-                    className="ml-1 opacity-50 hover:opacity-100 transition-opacity"
-                >
-                    <RefreshCw className={`w-3 h-3 ${isRefreshing ? "animate-spin" : ""}`} />
-                </button>
+            {/* Counts Display */}
+            <div className="flex flex-col items-center">
+                {/* Daily Count */}
+                <div className="flex items-center gap-2 text-[10px] text-emerald-100/80 font-medium tracking-wide bg-black/20 px-3 py-1 rounded-full backdrop-blur-sm border border-white/5 mb-1">
+                    <span>Bugun: <strong className="text-gold-400 text-xs mx-0.5">{counts.daily.toLocaleString()}</strong> kishi</span>
+                    <button
+                        onClick={fetchCount}
+                        disabled={isRefreshing}
+                        className="ml-1 opacity-50 hover:opacity-100 transition-opacity"
+                    >
+                        <RefreshCw className={`w-3 h-3 ${isRefreshing ? "animate-spin" : ""}`} />
+                    </button>
+                </div>
+
+                {/* Total Count */}
+                <span className="text-[9px] text-emerald-200/30 font-mono tracking-widest uppercase">
+                    Jami: {counts.total.toLocaleString()}
+                </span>
             </div>
         </div>
     );
