@@ -193,21 +193,21 @@ export default function Home() {
                 </div>
 
                 {/* Big Countdown */}
-                <div className="text-center mt-auto">
-                    <h2 className="text-3xl font-black text-gold-400 tracking-wider font-mono drop-shadow-md mb-8">
+                <div className="text-center mt-auto pb-4">
+                    <h2 className="text-3xl font-black text-gold-400 tracking-wider font-mono drop-shadow-md mb-2">
                         {timeLeft}
                     </h2>
 
                     <FastingCounter />
 
-                    <div className="w-full">
+                    <div className="w-full mt-2">
                         <a
                             href="https://t.me/share/url?url=https://shahrisabz-ramazon.vercel.app&text=Shahrisabz%20uchun%20Ramazon%20taqvimi%202026!%20Saharlik%20va%20Iftorlik%20vaqtlari."
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2 w-full py-3 bg-[#229ED9] hover:bg-[#1e8dbf] text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95"
+                            className="flex items-center justify-center gap-2 w-full py-2.5 bg-[#229ED9] hover:bg-[#1e8dbf] text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95"
                         >
-                            <Share2 size={20} />
+                            <Share2 size={18} />
                             Telegramda Ulashish
                         </a>
                     </div>
