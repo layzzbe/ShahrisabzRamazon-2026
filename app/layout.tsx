@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Shahrisabz Ramazon Taqvimi 2026",
         description: "Shahrisabz shahri uchun aniq Ramazon taqvimi, saharlik va iftorlik vaqtlari.",
-        url: "https://shahrisabz-ramazon.vercel.app",
+        url: "https://shahrisabz-ramazon-2026.vercel.app",
         siteName: "Shahrisabz Ramazon",
         images: [
             {
