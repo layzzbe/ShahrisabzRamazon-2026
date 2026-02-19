@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRamadan } from "@/context/RamadanContext";
 import { Sunrise, Moon, Landmark, Share2 } from "lucide-react";
-import FloatingMoon from "@/components/FloatingMoon";
 import { motion } from "framer-motion";
 
 const uzbekDays = ['YAKSHANBA', 'DUSHANBA', 'SESHANBA', 'CHORSHANBA', 'PAYSHANBA', 'JUMA', 'SHANBA'];
@@ -103,7 +102,7 @@ export default function Home() {
             <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-emerald-600/20 rounded-full blur-[100px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-gold-500/10 rounded-full blur-[80px] pointer-events-none" />
 
-            <FloatingMoon />
+            <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-gold-500/10 rounded-full blur-[80px] pointer-events-none" />
 
             <div className="max-w-md mx-auto px-6 py-8 relative z-10 flex flex-col h-full">
                 {/* Header */}
@@ -111,11 +110,15 @@ export default function Home() {
                     <h1 className="text-4xl font-black tracking-widest text-white mb-4 drop-shadow-lg flex items-center justify-center gap-3">
                         {/* Animated Neon Moon Icon */}
                         <motion.div
-                            animate={{ y: [-3, 3, -3] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            animate={{
+                                y: [-2, 2, -2],
+                                scale: [1, 1.05, 1],
+                                opacity: [0.8, 1, 0.8]
+                            }}
+                            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                             className="relative flex items-center justify-center w-12 h-12"
                         >
-                            <div className="absolute inset-0 bg-gold-400/20 blur-md rounded-full" />
+                            <div className="absolute inset-0 bg-amber-400/30 blur-lg rounded-full" />
                             <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -123,7 +126,7 @@ export default function Home() {
                                 strokeWidth="2"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                className="w-10 h-10 text-gold-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]"
+                                className="w-10 h-10 text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)]"
                             >
                                 <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" fill="currentColor" fillOpacity="0.2" />
                                 <path d="M19 3v4" />
