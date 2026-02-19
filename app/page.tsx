@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRamadan } from "@/context/RamadanContext";
 import { Sunrise, Moon, Landmark, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
+import FastingCounter from "@/components/FastingCounter";
 
 const uzbekDays = ['YAKSHANBA', 'DUSHANBA', 'SESHANBA', 'CHORSHANBA', 'PAYSHANBA', 'JUMA', 'SHANBA'];
 
@@ -196,6 +197,8 @@ export default function Home() {
                     <h2 className="text-3xl font-black text-gold-400 tracking-wider font-mono drop-shadow-md mb-8">
                         {timeLeft}
                     </h2>
+
+                    <FastingCounter />
 
                     <div className="w-full">
                         <a
