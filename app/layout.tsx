@@ -15,7 +15,11 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-    title: "Shahrisabz Ramazon Taqvimi 2026",
+    metadataBase: new URL("https://shahrisabz-ramazon.vercel.app"),
+    title: {
+        default: "Shahrisabz Ramazon Taqvimi 2026",
+        template: "%s | Shahrisabz Ramazon"
+    },
     description: "Shahrisabz shahri uchun aniq Ramazon taqvimi, saharlik va iftorlik vaqtlari, duolar va masjidlar ro'yxati.",
     appleWebApp: {
         title: "Ramazon",
@@ -25,11 +29,11 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Shahrisabz Ramazon Taqvimi 2026",
         description: "Shahrisabz shahri uchun aniq Ramazon taqvimi, saharlik va iftorlik vaqtlari.",
-        url: "https://shahrisabz-ramazon-2026.vercel.app",
+        url: "https://shahrisabz-ramazon.vercel.app",
         siteName: "Shahrisabz Ramazon",
         images: [
             {
-                url: "/opengraph-image.png", // Assuming default or auto-generated
+                url: "/opengraph-image.png",
                 width: 1200,
                 height: 630,
             },
@@ -37,6 +41,9 @@ export const metadata: Metadata = {
         locale: "uz_UZ",
         type: "website",
     },
+    alternates: {
+        canonical: "https://shahrisabz-ramazon.vercel.app",
+    }
 };
 
 export default function RootLayout({
