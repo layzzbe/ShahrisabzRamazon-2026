@@ -19,7 +19,17 @@ export default function Home() {
 
     // Moved uzbekDays outside component to avoid recreation
 
+    const [shareCount, setShareCount] = useState<number | null>(null);
+
     useEffect(() => {
+        // Fetch count for share button
+        fetch("/api/fasting", { cache: 'no-store' })
+            .then(res => res.json())
+            .then(data => {
+                if (data.count) setShareCount(data.count);
+            })
+            .catch(err => console.error(err));
+
         const updateTime = () => {
             const now = new Date();
             // Logic to find current Ramadan day based on date
@@ -202,7 +212,7 @@ export default function Home() {
 
                     <div className="w-full mt-2">
                         <a
-                            href="https://t.me/share/url?url=https://shahrisabz-ramazon.vercel.app&text=Shahrisabz%20uchun%20Ramazon%20taqvimi%202026!%20Saharlik%20va%20Iftorlik%20vaqtlari."
+                            href={`https://t.me/share/url?url=https://shahrisabz-ramazon-2026.vercel.app&text=🌙 Shahrisabz Ramazon Taqvimi 2026.%0A%0ABugun biz bilan birga ${shareCount ? shareCount.toLocaleString() : "1,250+"} kishi ro'za tutmoqda! Siz ham qo'shiling:`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center gap-2 w-full py-2.5 bg-[#229ED9] hover:bg-[#1e8dbf] text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-95"
