@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRamadan } from "@/context/RamadanContext";
 import { Sunrise, Moon, Landmark, Share2 } from "lucide-react";
 import FloatingMoon from "@/components/FloatingMoon";
+import { motion } from "framer-motion";
 
 const uzbekDays = ['YAKSHANBA', 'DUSHANBA', 'SESHANBA', 'CHORSHANBA', 'PAYSHANBA', 'JUMA', 'SHANBA'];
 
@@ -108,7 +109,27 @@ export default function Home() {
                 {/* Header */}
                 <header className="text-center mb-10">
                     <h1 className="text-4xl font-black tracking-widest text-white mb-4 drop-shadow-lg flex items-center justify-center gap-3">
-                        <Landmark className="text-gold-400 w-10 h-10" />
+                        {/* Animated Neon Moon Icon */}
+                        <motion.div
+                            animate={{ y: [-3, 3, -3] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            className="relative flex items-center justify-center w-12 h-12"
+                        >
+                            <div className="absolute inset-0 bg-gold-400/20 blur-md rounded-full" />
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="w-10 h-10 text-gold-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]"
+                            >
+                                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" fill="currentColor" fillOpacity="0.2" />
+                                <path d="M19 3v4" />
+                                <path d="M21 5h-4" />
+                            </svg>
+                        </motion.div>
                         SHAHRISABZ
                     </h1>
                     <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-2">
