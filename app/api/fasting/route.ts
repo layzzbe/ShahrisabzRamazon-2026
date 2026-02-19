@@ -10,11 +10,11 @@ const getDateKey = () => {
     // Let's rely on toLocaleDateString with timeZone.
     try {
         const date = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Tashkent" });
-        return `fasting_count:${date}`;
+        return `fasting_v2_daily:${date}`;
     } catch (e) {
         // Fallback if timezone fails
         const date = new Date().toISOString().split('T')[0];
-        return `fasting_count:${date}`;
+        return `fasting_v2_daily:${date}`;
     }
 };
 
@@ -25,16 +25,17 @@ export async function GET() {
         // Fetch both keys in parallel
         const [daily, total] = await Promise.all([
             kv.get<number>(key),
-            kv.get<number>("fasting_count_total")
+            kv.get<number>("fasting_v2_total")
         ]);
 
         return NextResponse.json({
             daily: daily || 0,
-            total: total || 1250 // Start total from a base if empty, or 0
+            total: total || 0 // New total starts from 0 as requested
         }, { headers: { 'Cache-Control': 'no-store' } });
     } catch (error) {
         console.error("KV GET Error:", error);
-        return NextResponse.json({ daily: 0, total: 1250 }, { status: 500 });
+        // Return 0s on error during migration/reset
+        return NextResponse.json({ daily: 0, total: 0 }, { status: 500 });
     }
 }
 
@@ -45,7 +46,7 @@ export async function POST() {
         // Increment both keys in parallel
         const [daily, total] = await Promise.all([
             kv.incr(key),
-            kv.incr("fasting_count_total")
+            kv.incr("fasting_v2_total")
         ]);
 
         return NextResponse.json({ daily, total });

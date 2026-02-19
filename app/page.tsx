@@ -148,7 +148,7 @@ export default function Home() {
                 </header>
 
                 {/* Main Cards */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="grid grid-cols-2 gap-4 mb-4">
                     {/* Saharlik Card */}
                     <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[1.5rem] p-4 flex flex-col items-center justify-center aspect-square shadow-xl relative overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -167,7 +167,7 @@ export default function Home() {
                 </div>
 
                 {/* Visual Progress Bar */}
-                <div className="mb-8 relative w-full px-1">
+                <div className="mb-6 relative w-full px-1">
                     {/* Time & Date Display - Centered absolutely relative to the bar container */}
                     <div className="absolute -top-8 left-0 right-0 flex justify-center z-20">
                         <span className="text-gold-400 font-mono font-bold text-xl drop-shadow-md">
@@ -198,8 +198,8 @@ export default function Home() {
 
                 {/* Big Countdown */}
                 <div className="text-center mt-auto pb-4">
-                    <div className="flex flex-col items-center justify-center mb-4">
-                        <span className="text-sm font-bold text-emerald-300 tracking-[0.2em] font-mono opacity-80 mb-1">
+                    <div className="flex flex-col items-center justify-center mb-3">
+                        <span className="text-xs sm:text-sm font-bold text-emerald-300 tracking-[0.2em] font-mono opacity-80 mb-0.5">
                             {countdownLabel}
                         </span>
                         <span className="text-5xl sm:text-6xl font-black text-gold-400 tracking-wider font-mono drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]">
@@ -228,7 +228,7 @@ export default function Home() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1, duration: 1 }}
-                        className="mt-6 mb-2 text-center"
+                        className="mt-4 mb-1 text-center"
                     >
                         <a
                             href="https://www.instagram.com/layzz.be/"
