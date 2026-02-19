@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { RamadanDay } from "@/data/ramadanData";
 import { useRamadan } from "@/context/RamadanContext";
 import { Lock, User, Save, RefreshCw } from "lucide-react";
 
@@ -116,14 +117,21 @@ export default function AdminPage() {
     );
 }
 
-function DataRow({ day, onSave }: { day: any; onSave: any }) {
+function DataRow({ day, onSave }: { day: RamadanDay; onSave: (id: number, sahar: string, iftar: string) => void }) {
     const [sahar, setSahar] = useState(day.sahar);
     const [iftar, setIftar] = useState(day.iftar);
     const [isDirty, setIsDirty] = useState(false);
 
+    // Sync state with props when external data changes (e.g. Reset or specific updates)
+    useEffect(() => {
+        setSahar(day.sahar);
+        setIftar(day.iftar);
+        setIsDirty(false);
+    }, [day.sahar, day.iftar]);
+
     const handleSave = () => {
         onSave(day.id, sahar, iftar);
-        setIsDirty(false);
+        // isDirty will be handled by useEffect above when parent updates
     };
 
     return (

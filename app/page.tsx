@@ -5,15 +5,18 @@ import { useRamadan } from "@/context/RamadanContext";
 import { Sunrise, Moon, Landmark, Share2 } from "lucide-react";
 import FloatingMoon from "@/components/FloatingMoon";
 
+const uzbekDays = ['YAKSHANBA', 'DUSHANBA', 'SESHANBA', 'CHORSHANBA', 'PAYSHANBA', 'JUMA', 'SHANBA'];
+
 export default function Home() {
     const { ramadanData } = useRamadan();
-    const [currentDay, setCurrentDay] = useState<any>(null);
+    // Use proper type instead of any
+    const [currentDay, setCurrentDay] = useState<typeof ramadanData[0] | null>(null);
     const [timeLeft, setTimeLeft] = useState("");
     const [progress, setProgress] = useState(0);
     const [currentTimeStr, setCurrentTimeStr] = useState("");
     const [currentDateStr, setCurrentDateStr] = useState("");
 
-    const uzbekDays = ['YAKSHANBA', 'DUSHANBA', 'SESHANBA', 'CHORSHANBA', 'PAYSHANBA', 'JUMA', 'SHANBA'];
+    // Moved uzbekDays outside component to avoid recreation
 
     useEffect(() => {
         const updateTime = () => {
