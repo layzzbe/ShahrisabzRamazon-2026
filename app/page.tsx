@@ -218,6 +218,23 @@ export default function Home() {
                             Telegramda Ulashish
                         </a>
                     </div>
+
+                    {/* Creator Credit */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1, duration: 1 }}
+                        className="mt-6 text-center"
+                    >
+                        <a
+                            href="https://www.instagram.com/layzz.be/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[10px] text-amber-400/40 hover:text-amber-400/80 transition-colors font-mono tracking-widest uppercase"
+                        >
+                            Dasturchi: @layzzbe
+                        </a>
+                    </motion.div>
                 </div>
             </div>
         </main>
